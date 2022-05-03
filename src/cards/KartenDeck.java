@@ -6,7 +6,7 @@ public class KartenDeck {
     private static final int MIN_DECK_SIZE = 0;
     private static final int MAX_DECK_SIZE = 52;
 
-    private ArrayList<Karte> kartenListe = new ArrayList<Karte>();
+    protected ArrayList<Karte> kartenListe = new ArrayList<Karte>();
 
     public KartenDeck() {
     }
@@ -70,21 +70,5 @@ public class KartenDeck {
 
     public void appendKarte(Karte karte) {
         this.kartenListe.add(karte);
-    }
-
-    public static void main(String[] args) {
-        KartenDeck kartenDeck = new KartenDeck();
-        kartenDeck.generateFullDeck();
-        kartenDeck.print();
-        System.out.println(kartenDeck.getDeckSize());
-        kartenDeck.removeKarte(new Karte(Karte.Farbe.PIK, 10));
-        kartenDeck.removeKarte(new Karte(Karte.Farbe.PIK, 10));
-        System.out.println(kartenDeck.getDeckSize());
-        // kartenDeck.removeKarte(karo7);
-        // System.out.println(kartenDeck.getDeckSize());
-        for (Karte.Farbe farbe : Karte.Farbe.values()) {
-            System.out.println(farbe);
-        }
-
     }
 }
