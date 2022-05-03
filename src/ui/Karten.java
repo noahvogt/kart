@@ -2,7 +2,7 @@ package ui;
 
 import javax.swing.SwingUtilities;
 
-public class Launcher {
+public class Karten {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
