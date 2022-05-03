@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -90,9 +91,10 @@ public class MainWindow {
 
         for (int index = startIndex; index <= endIndex; index++) {
             Karte karte = kartenListe.get(index);
-            String iconImagePath = "img/cards/" +
+            URL iconImagePath = ClassLoader.getSystemClassLoader().
+                                   getResource("img/cards/" +
                                    karte.getFarbe().toString().toLowerCase() +
-                                   "-" + karte.getWert() + ".png";
+                                   "-" + karte.getWert() + ".png");
             JLabel jlabel = new JLabel();
             ImageIcon labelIcon = new ImageIcon(iconImagePath);
             jlabel.setIcon(labelIcon);
@@ -134,7 +136,8 @@ public class MainWindow {
 	private JLabel createMischMaschineLabel() {
 		JLabel mischmaschineLabel = new JLabel("Mischmaschine");
         applyNordTextTheme(mischmaschineLabel);
-        ImageIcon mischmaschineIcon = new ImageIcon("img/shuffle-64.png");
+        ImageIcon mischmaschineIcon = new ImageIcon(ClassLoader.
+                getSystemClassLoader().getResource("img/shuffle-64.png"));
         mischmaschineLabel.setIconTextGap(10);
         mischmaschineLabel.setIcon(mischmaschineIcon);
 
