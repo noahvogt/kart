@@ -1,6 +1,7 @@
 package cards;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class KartenDeck {
     private static final int MIN_DECK_SIZE = 0;
@@ -70,5 +71,9 @@ public class KartenDeck {
 
     public void appendKarte(Karte karte) {
         this.kartenListe.add(karte);
+    }
+
+    public void mischen() {
+        Collections.shuffle(this.kartenListe);
     }
 }

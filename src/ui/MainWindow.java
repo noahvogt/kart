@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import cards.Karte;
-import cards.MischMaschine;
+import cards.KartenDeck;
 
 public class MainWindow {
     private JFrame frame;
@@ -29,40 +30,46 @@ public class MainWindow {
     private JButton previousPageButton, nextPageButton;
     private JLabel numberOfPagesLabel, numberOfCardsLabel;
 
-    private int numberOfPages, numberOfCards, activePageNumber;
-    private MischMaschine kartenDeck;
+    private int numberOfPages = 0, numberOfCards = 0, activePageNumber = 1;
+    private KartenDeck kartenDeck;
 
     public MainWindow() {
         initialize();
     }
 
 	private void initialize() {
-        UIManager.put("ToolTip.background", Color.decode("#A3BE8C"));
-        UIManager.put("ToolTip.border", new LineBorder(Color.decode("#2e3440"),
-                      1));
+        applyUIManagerTheme();
 
-		frame = createMasterFrame();
+		createMasterFrame();
 
-        bottomPanel = createBottomPanel();
+        createBottomPanel();
+        createTopPanel();
+        createCardPanel();
 
-        topPanel = createTopPanel();
-
-        numberOfPages = 0;
-        numberOfCards = 0;
-        activePageNumber = 1;
-
-        cardPanel = new JPanel(new GridLayout(3, 8, 10, 10));
-        Border border = cardPanel.getBorder();
-        Border margin = new EmptyBorder(0, 10, 0, 10);
-        cardPanel.setBorder(new CompoundBorder(border, margin));
-
-        kartenDeck = new MischMaschine();
-        kartenDeck.generateFullDeck();
+        createCardDeck();
 
         redrawCardPanel();
         updateBottomPanelNumbers();
 
         displayAndPackFrame();
+	}
+
+	private void createCardDeck() {
+		kartenDeck = new KartenDeck();
+        kartenDeck.generateFullDeck();
+	}
+
+	private void applyUIManagerTheme() {
+		UIManager.put("ToolTip.background", Color.decode("#A3BE8C"));
+        UIManager.put("ToolTip.border", new LineBorder(Color.decode("#2E3440"),
+                      1));
+	}
+
+	private void createCardPanel() {
+		cardPanel = new JPanel(new GridLayout(3, 8, 10, 10));
+        Border border = cardPanel.getBorder();
+        Border margin = new EmptyBorder(0, 10, 0, 10);
+        cardPanel.setBorder(new CompoundBorder(border, margin));
 	}
 
 	private void displayAndPackFrame() {
@@ -103,23 +110,26 @@ public class MainWindow {
     //     return kartenDeck.getDeckSize() <= 24;
     // }
 
-	private JPanel createTopPanel() {
-        JPanel topPanel = new JPanel();
+    private void applyNordTextTheme(JComponent jComponent) {
+        jComponent.setBackground(Color.decode("#373D49"));
+        jComponent.setForeground(Color.decode("#D8DEE9"));
+        jComponent.setFont(new Font("sans-serif", Font.PLAIN, 24));
+    }
+
+	private void createTopPanel() {
+        topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
-        topPanel.setBackground(Color.decode("#2e3440"));
+        topPanel.setBackground(Color.decode("#2E3440"));
 
         JLabel mischmaschineLabel = new JLabel("Mischmaschine");
+        applyNordTextTheme(mischmaschineLabel);
         ImageIcon mischmaschineIcon = new ImageIcon("img/shuffle-64.png");
-        mischmaschineLabel.setBackground(Color.decode("#373d49"));
-        mischmaschineLabel.setForeground(Color.decode("#D8DEE9"));
-        mischmaschineLabel.setFont(new Font("sans-serif", Font.PLAIN, 24));
+        mischmaschineLabel.setIconTextGap(10);
         mischmaschineLabel.setIcon(mischmaschineIcon);
 
         JButton mischButton = new JButton("Mischen");
-        mischButton.setBackground(Color.decode("#373d49"));
-        mischButton.setForeground(Color.decode("#D8DEE9"));
+        applyNordTextTheme(mischButton);
         mischButton.setFocusable(false);
-        mischButton.setFont(new Font("sans-serif", Font.PLAIN, 24));
         mischButton.setToolTipText("Mische alle Karten in der Maschine");
 
         mischButton.addActionListener(new ActionListener(){
@@ -130,13 +140,10 @@ public class MainWindow {
 				goToPageDirection(0);
                 mischButton.setEnabled(true);
 			}
-
         });
 
         topPanel.add(mischmaschineLabel);
         topPanel.add(mischButton);
-
-        return topPanel;
 	}
 
     private void goToPreviousPage() {
@@ -158,18 +165,13 @@ public class MainWindow {
         redrawCardPanel();
     }
 
-	private JPanel createBottomPanel() {
-        JPanel bottomPanel = new JPanel();
+	private void createBottomPanel() {
+        bottomPanel = new JPanel();
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
-        bottomPanel.setBackground(Color.decode("#2e3440"));
+        bottomPanel.setBackground(Color.decode("#2E3440"));
 
-        numberOfPagesLabel = new JLabel("Anzahl Seiten: 0");
-        numberOfPagesLabel.setForeground(Color.decode("#D8DEE9"));
-        numberOfPagesLabel.setFont(new Font("sans-serif", Font.PLAIN, 24));
-
-        numberOfCardsLabel = new JLabel("Anzahl Karten: 0");
-        numberOfCardsLabel.setForeground(Color.decode("#D8DEE9"));
-        numberOfCardsLabel.setFont(new Font("sans-serif", Font.PLAIN, 24));
+        numberOfPagesLabel = createBottomLabel();
+        numberOfCardsLabel = createBottomLabel();
 
         previousPageButton = createArrowButton("←", "vorherigen");
         nextPageButton = createArrowButton("→", "nächsten");
@@ -196,8 +198,13 @@ public class MainWindow {
         bottomPanel.add(numberOfCardsLabel);
         bottomPanel.add(numberOfPagesLabel);
         bottomPanel.add(nextPageButton);
+	}
 
-        return bottomPanel;
+	private JLabel createBottomLabel() {
+		JLabel bottomLabel = new JLabel();
+        bottomLabel.setForeground(Color.decode("#D8DEE9"));
+        bottomLabel.setFont(new Font("sans-serif", Font.PLAIN, 24));
+        return bottomLabel;
 	}
 
     private void updateBottomPanelNumbers() {
@@ -211,36 +218,31 @@ public class MainWindow {
                                    numberOfCards));
     }
 
-	private JFrame createMasterFrame() {
-		JFrame frame = new JFrame();
-        frame.setTitle("ayyy");
+	private void createMasterFrame() {
+		frame = new JFrame();
+        frame.setTitle("Mischmaschine");
         frame.setLayout(new BorderLayout(10, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
 
-        /* center window if floating window management mode */
+        /* spawn window centered (in floating window management mode) */
         frame.setLocationRelativeTo(null);
 
         BorderLayout borderLayout = new BorderLayout();
         borderLayout.setHgap(10);
         borderLayout.setVgap(10);
         frame.setLayout(borderLayout);
-
-        return frame;
 	}
 
     private JButton createArrowButton(String text, String pageTarget) {
         JButton jbutton = new JButton(text);
-        jbutton.setBackground(Color.decode("#373d49"));
-        jbutton.setForeground(Color.decode("#D8DEE9"));
+        applyNordTextTheme(jbutton);
         jbutton.setFocusable(false);
-        jbutton.setFont(new Font("sans-serif", Font.PLAIN, 24));
         jbutton.setToolTipText("Gehe zur " + pageTarget + " Seite der " +
                                "Kartenanzeige");
         return jbutton;
     }
-
 
     public void show() {}
 }
