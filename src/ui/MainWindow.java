@@ -80,9 +80,6 @@ public class MainWindow {
 	}
 
     private void redrawCardPanel() {
-        // if (isNotNeededToDrawMultiplePages())
-        //     return;
-
         int startIndex = (24 * (activePageNumber - 1));
         int endIndex = (Math.min((24 * (activePageNumber - 1) + 23),
                                   (kartenDeck.getDeckSize() - 1)));
@@ -106,10 +103,6 @@ public class MainWindow {
         cardPanel.repaint();
     }
 
-    // private boolean isNotNeededToDrawMultiplePages() {
-    //     return kartenDeck.getDeckSize() <= 24;
-    // }
-
     private void applyNordTextTheme(JComponent jComponent) {
         jComponent.setBackground(Color.decode("#373D49"));
         jComponent.setForeground(Color.decode("#D8DEE9"));
@@ -121,16 +114,8 @@ public class MainWindow {
 		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
         topPanel.setBackground(Color.decode("#2E3440"));
 
-        JLabel mischmaschineLabel = new JLabel("Mischmaschine");
-        applyNordTextTheme(mischmaschineLabel);
-        ImageIcon mischmaschineIcon = new ImageIcon("img/shuffle-64.png");
-        mischmaschineLabel.setIconTextGap(10);
-        mischmaschineLabel.setIcon(mischmaschineIcon);
-
-        JButton mischButton = new JButton("Mischen");
-        applyNordTextTheme(mischButton);
-        mischButton.setFocusable(false);
-        mischButton.setToolTipText("Mische alle Karten in der Maschine");
+        JLabel mischMaschineLabel = createMischMaschineLabel();
+        JButton mischButton = createMischButton();
 
         mischButton.addActionListener(new ActionListener(){
 			@Override
@@ -142,8 +127,27 @@ public class MainWindow {
 			}
         });
 
-        topPanel.add(mischmaschineLabel);
+        topPanel.add(mischMaschineLabel);
         topPanel.add(mischButton);
+	}
+
+	private JLabel createMischMaschineLabel() {
+		JLabel mischmaschineLabel = new JLabel("Mischmaschine");
+        applyNordTextTheme(mischmaschineLabel);
+        ImageIcon mischmaschineIcon = new ImageIcon("img/shuffle-64.png");
+        mischmaschineLabel.setIconTextGap(10);
+        mischmaschineLabel.setIcon(mischmaschineIcon);
+
+		return mischmaschineLabel;
+	}
+
+	private JButton createMischButton() {
+		JButton mischButton = new JButton("Mischen");
+        applyNordTextTheme(mischButton);
+        mischButton.setFocusable(false);
+        mischButton.setToolTipText("Mische alle Karten in der Maschine");
+
+		return mischButton;
 	}
 
     private void goToPreviousPage() {
