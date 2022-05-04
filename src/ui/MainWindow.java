@@ -26,6 +26,9 @@ import cards.Karte;
 import cards.KartenDeck;
 
 public class MainWindow {
+    final int GAP_SIZE = 10;
+    final int CARD_ROWS = 3, CARD_COLUMNS = 7;
+
     private JFrame frame;
     private JPanel bottomPanel, topPanel, cardPanel;
     private JButton previousPageButton, nextPageButton;
@@ -68,9 +71,10 @@ public class MainWindow {
 	}
 
 	private void createCardPanel() {
-		cardPanel = new JPanel(new GridLayout(3, 8, 10, 10));
+		cardPanel = new JPanel(new GridLayout(CARD_ROWS, CARD_COLUMNS,
+                                              GAP_SIZE, GAP_SIZE));
         Border border = cardPanel.getBorder();
-        Border margin = new EmptyBorder(0, 10, 0, 10);
+        Border margin = new EmptyBorder(0, GAP_SIZE, 0, GAP_SIZE);
         cardPanel.setBorder(new CompoundBorder(border, margin));
 	}
 
@@ -105,17 +109,19 @@ public class MainWindow {
     }
 
 	private void calulateStartAndEndIndex() {
-		startIndex = (24 * (activePageNumber - 1));
-        endIndex = (Math.min((24 * (activePageNumber - 1) + 23),
-                                  (kartenDeck.getDeckSize() - 1)));
+		startIndex = (CARD_ROWS * CARD_COLUMNS * (activePageNumber - 1));
+        endIndex = (Math.min((CARD_ROWS * CARD_COLUMNS * (activePageNumber - 1)
+                        + (CARD_ROWS * CARD_COLUMNS) - 1), (kartenDeck.
+                        getDeckSize()- 1)));
 	}
 
     private void fillUpWithEmptyCardsIfNeeded() {
-        if ((endIndex - startIndex) >= 16) {
+        if ((endIndex - startIndex) >= ((CARD_ROWS - 1 ) * CARD_COLUMNS)) {
             return;
         }
 
-        for (int index = endIndex; index < startIndex + 23; index++) {
+        for (int index = endIndex; index < startIndex + ((CARD_ROWS *
+                        CARD_COLUMNS) - 1); index++) {
             URL iconImagePath = ClassLoader.getSystemClassLoader().
                                    getResource("img/cards/empty.png");
             JLabel jlabel = new JLabel();
@@ -133,11 +139,23 @@ public class MainWindow {
 
 	private void createTopPanel() {
         topPanel = new JPanel();
-		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, GAP_SIZE));
         topPanel.setBackground(Color.decode("#2E3440"));
 
         JLabel mischMaschineLabel = createMischMaschineLabel();
         JButton mischButton = createMischButton();
+        JButton resetButton = createResetButton();
+
+        resetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resetButton.setEnabled(false);
+                createCardDeck();
+				goToPageDirection(0);
+                resetButton.setEnabled(true);
+			}
+
+        });
 
         mischButton.addActionListener(new ActionListener(){
 			@Override
@@ -151,6 +169,7 @@ public class MainWindow {
 
         topPanel.add(mischMaschineLabel);
         topPanel.add(mischButton);
+        topPanel.add(resetButton);
 	}
 
 	private JLabel createMischMaschineLabel() {
@@ -158,18 +177,24 @@ public class MainWindow {
         applyNordTextTheme(mischmaschineLabel);
         ImageIcon mischmaschineIcon = new ImageIcon(ClassLoader.
                 getSystemClassLoader().getResource("img/shuffle-64.png"));
-        mischmaschineLabel.setIconTextGap(10);
+        mischmaschineLabel.setIconTextGap(GAP_SIZE);
         mischmaschineLabel.setIcon(mischmaschineIcon);
-
 		return mischmaschineLabel;
 	}
+
+    private JButton createResetButton() {
+        JButton resetButton = new JButton("Reset");
+        applyNordTextTheme(resetButton);
+        resetButton.setFocusable(false);
+        resetButton.setToolTipText("Setze die Kartenpositionen zurück");
+        return resetButton;
+    }
 
 	private JButton createMischButton() {
 		JButton mischButton = new JButton("Mischen");
         applyNordTextTheme(mischButton);
         mischButton.setFocusable(false);
         mischButton.setToolTipText("Mische alle Karten in der Maschine");
-
 		return mischButton;
 	}
 
@@ -194,7 +219,7 @@ public class MainWindow {
 
 	private void createBottomPanel() {
         bottomPanel = new JPanel();
-		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, GAP_SIZE));
         bottomPanel.setBackground(Color.decode("#2E3440"));
 
         numberOfPagesLabel = createBottomLabel();
@@ -235,7 +260,7 @@ public class MainWindow {
 	}
 
     private void updateBottomPanelNumbers() {
-        numberOfPages = kartenDeck.getDeckSize() / 24 + 1;
+        numberOfPages = kartenDeck.getDeckSize() / (CARD_ROWS * CARD_COLUMNS) + 1;
         numberOfPagesLabel.setText("Seite: " + Integer.toString(
                                    activePageNumber) + " / " + Integer.toString(
                                    numberOfPages));
@@ -248,7 +273,6 @@ public class MainWindow {
 	private void createMasterFrame() {
 		frame = new JFrame();
         frame.setTitle("Mischmaschine");
-        frame.setLayout(new BorderLayout(10, 5));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
@@ -257,8 +281,8 @@ public class MainWindow {
         frame.setLocationRelativeTo(null);
 
         BorderLayout borderLayout = new BorderLayout();
-        borderLayout.setHgap(10);
-        borderLayout.setVgap(10);
+        borderLayout.setHgap(GAP_SIZE);
+        borderLayout.setVgap(GAP_SIZE);
         frame.setLayout(borderLayout);
 	}
 
