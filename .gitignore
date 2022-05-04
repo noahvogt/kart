@@ -1,2 +1,16 @@
 *.class
 *.jar
+*.pdf
+*.aux
+*.bcf
+*.idx
+*.log
+*.out
+*.run.xml
+*.toc
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.ilg
+*.ind
