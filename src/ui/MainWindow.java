@@ -32,6 +32,7 @@ public class MainWindow {
     private JLabel numberOfPagesLabel, numberOfCardsLabel;
 
     private int numberOfPages = 0, numberOfCards = 0, activePageNumber = 1;
+    int startIndex, endIndex;
     private KartenDeck kartenDeck;
 
     public MainWindow() {
@@ -81,13 +82,10 @@ public class MainWindow {
 	}
 
     private void redrawCardPanel() {
-        int startIndex = (24 * (activePageNumber - 1));
-        int endIndex = (Math.min((24 * (activePageNumber - 1) + 23),
-                                  (kartenDeck.getDeckSize() - 1)));
+        cardPanel.removeAll();
+        calulateStartAndEndIndex();
 
         ArrayList<Karte> kartenListe = kartenDeck.getDeck();
-
-        cardPanel.removeAll();
 
         for (int index = startIndex; index <= endIndex; index++) {
             Karte karte = kartenListe.get(index);
@@ -101,8 +99,30 @@ public class MainWindow {
             cardPanel.add(jlabel);
         }
 
+        fillUpWithEmptyCardsIfNeeded();
         cardPanel.revalidate();
         cardPanel.repaint();
+    }
+
+	private void calulateStartAndEndIndex() {
+		startIndex = (24 * (activePageNumber - 1));
+        endIndex = (Math.min((24 * (activePageNumber - 1) + 23),
+                                  (kartenDeck.getDeckSize() - 1)));
+	}
+
+    private void fillUpWithEmptyCardsIfNeeded() {
+        if ((endIndex - startIndex) >= 16) {
+            return;
+        }
+
+        for (int index = endIndex; index < startIndex + 23; index++) {
+            URL iconImagePath = ClassLoader.getSystemClassLoader().
+                                   getResource("img/cards/empty.png");
+            JLabel jlabel = new JLabel();
+            ImageIcon labelIcon = new ImageIcon(iconImagePath);
+            jlabel.setIcon(labelIcon);
+            cardPanel.add(jlabel);
+        }
     }
 
     private void applyNordTextTheme(JComponent jComponent) {
