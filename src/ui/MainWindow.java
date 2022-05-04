@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -97,10 +98,25 @@ public class MainWindow {
                                    getResource("img/cards/" +
                                    karte.getFarbe().toString().toLowerCase() +
                                    "-" + karte.getWert() + ".png");
-            JLabel jlabel = new JLabel();
+            JButton cardButton = new JButton();
+            cardButton.setBorderPainted(false);
+            cardButton.setBorder(null);
+            cardButton.setFocusable(false);
+            cardButton.setMargin(new Insets(0, 0, 0, 0));
+            cardButton.setContentAreaFilled(false);
             ImageIcon labelIcon = new ImageIcon(iconImagePath);
-            jlabel.setIcon(labelIcon);
-            cardPanel.add(jlabel);
+            cardButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+                    System.out.println(karte.getFarbe());
+                    System.out.println(karte.getWert());
+				}
+
+            });
+
+            cardButton.setIcon(labelIcon);
+
+            cardPanel.add(cardButton);
         }
 
         fillUpWithEmptyCardsIfNeeded();
