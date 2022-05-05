@@ -29,7 +29,7 @@ public class MainWindow {
     final int GAP_SIZE = 10;
     final int CARD_ROWS = 3, CARD_COLUMNS = 7;
 
-    private JFrame frame;
+    private JFrame masterFrame;
     private JPanel bottomPanel, topPanel, cardPanel;
     private JButton previousPageButton, nextPageButton;
     private JLabel numberOfPagesLabel, numberOfCardsLabel;
@@ -79,10 +79,10 @@ public class MainWindow {
 	}
 
 	private void displayAndPackFrame() {
-		frame.add(topPanel, BorderLayout.NORTH);
-        frame.add(cardPanel, BorderLayout.CENTER);
-        frame.add(bottomPanel, BorderLayout.SOUTH);
-        frame.pack();
+		masterFrame.add(topPanel, BorderLayout.NORTH);
+        masterFrame.add(cardPanel, BorderLayout.CENTER);
+        masterFrame.add(bottomPanel, BorderLayout.SOUTH);
+        masterFrame.pack();
 	}
 
     private void redrawCardPanel() {
@@ -271,19 +271,19 @@ public class MainWindow {
     }
 
 	private void createMasterFrame() {
-		frame = new JFrame();
-        frame.setTitle("Mischmaschine");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setVisible(true);
+		masterFrame = new JFrame();
+        masterFrame.setTitle("Mischmaschine");
+        masterFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        masterFrame.setResizable(false);
+        masterFrame.setVisible(true);
 
         /* spawn window centered (in floating window management mode) */
-        frame.setLocationRelativeTo(null);
+        masterFrame.setLocationRelativeTo(null);
 
         BorderLayout borderLayout = new BorderLayout();
         borderLayout.setHgap(GAP_SIZE);
         borderLayout.setVgap(GAP_SIZE);
-        frame.setLayout(borderLayout);
+        masterFrame.setLayout(borderLayout);
 	}
 
     private JButton createArrowButton(String text, String pageTarget) {

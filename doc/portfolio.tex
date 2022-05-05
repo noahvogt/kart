@@ -24,7 +24,6 @@
 \hypersetup{%
 unicode,pdffitwindow,
 pdfkeywords = {pdf, LaTeX, hyperref, thumbnails},
-pdfauthor = {Brüder Grimm},
 bookmarksopen = true,
 bookmarksnumbered = true,
 pdfcenterwindow=true,
@@ -60,7 +59,7 @@ includeheadfoot}
 \THEDAY.~\monthname[\THEMONTH] \THEYEAR}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\lhead{Noah Vogt}
+\lhead{Noah J. Vogt}
 \chead{}
 %\rhead{\dmy\today}
 \lfoot{}
@@ -107,33 +106,16 @@ includeheadfoot}
 \usepackage{color}
 \usepackage{xcolor}
 
+\usepackage{minted}
+\usemintedstyle{one-dark}
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{background}{rgb}{0.36,0.36,0.36}
-\definecolor{shpurple}{HTML}{C301FF}
-\definecolor{shgreen}{HTML}{3CFF00}
-
-\lstset{
-    numbersep=3pt,
-    keywordstyle=\color{blue},
-    commentstyle=\color{dkgreen},
-    stringstyle=\color{mauve},
-    breaklines=true,
-    numbers=left,
-    numberstyle=\scriptsize\color{black},
-    frame=none,
-    basicstyle = \small\ttfamily,
-    breaklines=true
-    breakatwhitespace=false,
-    columns=flexible,
-    xleftmargin=0.5cm,framesep=8pt,framerule=0pt,
-    aboveskip=3mm,
-    morekeywords={*, factorial, sum, erlang},
-    keywordstyle=\color{shpurple}\textbf,
-    commentstyle=\color{shgreen}\textit,
-    stringstyle=\color{shred}   belowskip=3mm,
-}
+\definecolor{bg}{HTML}{282C34} % #282C34
+\definecolor{shpurple}{HTML}{C301FF} % #C301FF
+\definecolor{shgreen}{HTML}{3CFF00} % #3CFF00
+\definecolor{shred}{HTML}{EE0606} % #EE0606
 
 %\usepackage[backend=biber,style=apa]{biblatex}
 \usepackage[
@@ -141,7 +123,7 @@ backend=biber,
 style=alphabetic,
 sorting=ynt,
 ]{biblatex}
-\addbibresource{lit/refs.bib}
+%\addbibresource{lit/refs.bib}
 
 \usepackage{csquotes}
 
@@ -161,11 +143,10 @@ sorting=ynt,
     {\Large aus der Klasse 4cg \par}
     \vspace{0.5cm}
 
-    %\begin{figure}[H]
-    %    \centering
-    %    %\includegraphics[width=.8\textwidth]{../logo/version3d.png}
-    %    \includegraphics[width=.7\textwidth]{../logo/version3d.png}
-    %\end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.9\textwidth]{media/card-panel.jpg}
+    \end{figure}
 
     \vspace{0.5cm}
     {\Large Fachlehrperson: Victor Yakhontov \par }
@@ -185,7 +166,7 @@ Das Produkt dieser Portfolioarbeit ist ein ausführbares Programm mit geografisc
 \begin{figure}[H]
     \centering
     \includegraphics[width=.7\textwidth]{media/early-screenshot.jpg}
-    \caption{Spielkarten}
+    \caption{Das Produkt}
 \end{figure}
 
 Zuerst sind die Karten in sortierter Reihenfolge dargestellt, sie werden erst durch das Drücken auf den \say{Misch}-Button gemischt. Dieser Vorgang lässt sich beliebig oft wiederholen durch erneutes Drücken des Knopfes durch den Nutzer. Um wieder zum sortierten Anfangszustand zurück zu gelangen, kann man den \say{Reset}-Button drücken.\\
@@ -206,7 +187,7 @@ Es gibt einige Einschränkungen, welche den Rahmen dieser Arbeit setzen:
 
 Im darauffolgenden Hauptteil dieser Portfolioarbeit wird zuerst genauer auf die Aufgabestellung eingegangen, analysiert und interpretiert. Dies ist ein wichtiger Schritt, denn er soll den weiteren Ablauf des Projekts bestimmen.\\
 
-Als nächstes wird der grobe Lösungsansatz vorgestellt, und immer weiter vertieft. Dazu wird sich unter anderem bedient an Codebeispielen, Programmablaufdiagrammen und Screenshots, um durch die grafische Darstellung die Konzepte besser anschaulich zu machen.\\
+Als nächstes wird der grobe Lösungsansatz vorgestellt, und immer weiter vertieft. Dazu wird sich unter anderem auch reichlich bedient an Codebeispielen, Konzepten, Skizzen, Diagrammen und Screenshots, um durch die grafische Darstellung die Konzepte besser anschaulich zu machen.\\
 
 Ebenso wird auch auf die Wahl von Bibliotheken und relevanten Programmierwerkzeugen eingegangen. Diese werden je nach dem kurz vorgestellt, mit Alternativen verglichen und der Entscheid begründet.\\
 
@@ -259,15 +240,18 @@ Auf die Schlussfolgerungen und Reflexionen auf die Arbeit als gesamtes wird noch
 
 \subsection{Lösungsansatz}
 
-\subsubsection{Grobe Übersicht}
+\subsubsection{Übersicht}
+
+Zuerst hier eine kleine grafische Übersicht der verwendeten Klassen, ihrer kurzen Erklärung:
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\textwidth]{media/grober-ansatz.png}
-    \caption{Spielkarten}
-    % TODO: mention 3 panels
+    \includegraphics[width=\textwidth]{media/class-overview.png}
+    \caption{Grobe Übersicht}
 \end{figure}
 
-Wie in der obigen Abbildung ersichtlich, wird in der Hauptklasse \texttt{Karten} durch das \texttt{SwingUtilities.invokeLater()}-Environment ausgeführt, welches den einzigen Nutzen hat, das Grafikfenster zu starten, welches in der Klasse \texttt{MainWindow} geschrieben ist.\\
+Wie in der obigen Abbildung ersichtlich, wird als erstes die Hauptklasse \texttt{Karten} durch das \texttt{SwingUtilities.
+invokeLater()}-Environment ausgeführt, welches den einzigen Nutzen hat, das Grafikfenster zu starten, welches in der Klasse \texttt{MainWindow} geschrieben ist.\\
 
 Das Grafikfenster besteht aus verschiedenen Komponenten der AWT- und Swing-Library, doch darauf wird später im Text noch genauer eingegangen. Grob ist das Programm aber eingeteilt in ein Top-Panel, Bottom-Panel und eine Kartenansicht dazwischen.\\
 
@@ -276,46 +260,26 @@ Um mit dem Kartendeck im Grafikfenster sinnvoll umgehen zu können, wurde ein Ob
 \subsubsection{Grafisches Interface}
 % TODO: insert irl plan
 
-Um ein Kartenspiel grafisch darzustellen wurde überlegt, es muss ein Fenster her, das in der Lage ist alle 52 Karten des Decks darzustellen. Und das wie schon bei der Aufgabeninterpretation erwähnt, am besten ohne Überlappungen von Karten.
+Um ein Kartenspiel grafisch darzustellen wurde überlegt, es muss ein Fenster her, das in der Lage ist alle 52 Karten des Decks darzustellen. Und das wie schon bei der Aufgabeninterpretation erwähnt, am besten ohne Überlappungen von Karten. Die hier sichtbare, ursprüngliche Bleistift-Skizze wurde fast eins zu eins umgesetzt und kaum umkonzipiert:
 
-JComponents
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.4\textwidth]{media/grober-ansatz.png}
+    \caption{"ursprüngliches Konzept"}
+\end{figure}
+
+Um dieses Konzept umsetzen zu können, wurden verschiedene JComponents der SWING-Library eingesetzt welche folgendermassen organisiert sind in der Klasse \texttt{MainWindow}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{media/gui-overview.png}
+    \caption{GUI Komponenten}
+\end{figure}
 
 \subsubsection{Datenklasse \texttt{Karte}}
 Um eine Sache in ein Datenobjekt zu übersetzen, muss man sich erst einmal überlegen, was für Eigenschaften eine Spielkarte so besitzt. Da wären zuerst die \textit{Kartenwerte} von 2 bis Ass und die sogenannten \textit{Kartenfarben} Pik, Karo, Herz und Kreuz. Mit diesen beiden Eigenschaften kann eine Karte \textit{eindeutig} definiert werden. Diese beiden Karteneigenschaften sollen dann dementsprechend Attribute der Klasse \texttt{Karte} sein.\\
 
-\begin{figure}[H]
-\lstset{language=java}
-\begin{lstlisting}
-    public class Karte {
-        public enum Farbe {
-            KREUZ, PIK, KARO, HERZ;
-        }
-
-        private static final int MIN_WERT = 2;
-        private static final int MAX_WERT = 14;
-
-        private int wert;
-        private Farbe farbe;
-\end{lstlisting}
-    \caption{Deklaration der Klasse \texttt{Karte} und deren Attributen}
-\end{figure}
-
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=.9\textwidth]{media/top-panel.jpg}
-%     \caption{Screenshot: Bottom Panel}
-% \end{figure}
-
-Da die Kartenfarbe nur vier feste, gleichwertige Werte annehmen kann, welche sich am besten durch ihren Namen referenzieren lassen, scheint hier die Nutzung eines \texttt{enum}s angebracht. Im Code sieht dass dann so aus:\\ % TODO: insert enum / Karte.java attributes lstlisting
-
-\lstset{language=java}
-\begin{lstlisting}
-    public enum Farbe {
-        KREUZ, PIK, KARO, HERZ;
-    }
-\end{lstlisting}
-
+Da die Kartenfarbe nur vier feste, gleichwertige Werte annehmen kann, welche sich am besten durch ihren Namen referenzieren lassen, scheint hier die Nutzung eines \texttt{enum}s angebracht.\\
 
 Die Kartenwerte bestehen ja aus \say{2}, \say{3}, \say{4}, \say{5}, \say{6}, \say{7}, \say{8}, \say{9}, \say{10}, \say{Bauer}, \say{Dame}, \say{König}, \say{Ass}. Diese sind im Gegensatz zu den Karten nicht gleichwertig und lassen sich ganzzahligen Werten zuordnen. Für dieses Projekt sind diese wie folgt definiert:
 
@@ -339,6 +303,12 @@ Die Kartenwerte bestehen ja aus \say{2}, \say{3}, \say{4}, \say{5}, \say{6}, \sa
     \hline
     \say{7} & \texttt{7}\\
     \hline
+\end{tabular}
+    \hspace{1cm}
+\begin{tabular}{|c|c|}
+    \hline
+    \textbf{Kartenwert} & \textbf{Integer Wert}\\
+    \hline
     \say{8} & \texttt{8}\\
     \hline
     \say{9} & \texttt{9}\\
@@ -356,8 +326,40 @@ Die Kartenwerte bestehen ja aus \say{2}, \say{3}, \say{4}, \say{5}, \say{6}, \sa
 \end{tabular}
 \end{table}
 
+Im Code wurden die Attribute der Klasse \texttt{Karte} wie folgt umgesetzt:
+
+\begin{listing}[H]
+\begin{minted}[bgcolor=bg]{java}
+public class Karte {
+    public enum Farbe {
+        KREUZ, PIK, KARO, HERZ;
+    }
+
+    private static final int MIN_WERT = 2;
+    private static final int MAX_WERT = 14;
+
+    private int wert;
+    private Farbe farbe;
+\end{minted}
+\caption{Deklaration der Klasse \texttt{Karte} und deren Attributen}
+\label{lst:karte}
+\end{listing}
+
 
 \subsubsection{Datenklasse \texttt{KartenDeck}}
+
+Der Sinn dieser Klasse ist die Speicherung, Verwaltung und sonstige Manipulation seines einzigen Attributs, einer \texttt{ArrayList} bestehend aus Typen der Klasse \texttt{Karte}.
+
+\begin{listing}[H]
+    \begin{minted}[bgcolor=bg]{java}
+    public class KartenDeck {
+        protected ArrayList<Karte> kartenListe = new ArrayList<Karte>();
+    \end{minted}
+    \caption{Deklaration der Klasse \texttt{KartenDeck} und seinem Attribut}
+\end{listing}
+
+Für die Verwaltung dieses Kartendecks bietet die Klasse einige nützliche, öffentliche Methoden (abgesehen vom Constructor) wie zum anhängen und Löschen von Karten (\texttt{appendKarte(Karte karte)} und \texttt{removeKarte(Karte karte)}), dem generieren eines neuen Decks (\texttt{generateFullDeck()}), dem geordneten ausgeben aus der Kommandozeile (\texttt{print()}) und der Mischfunktion (\texttt{mischen()}). Auch zu erwähnen sind die Getter- und Settermethoden (\texttt{getDeck}, \texttt{getDeckSize}, \texttt{setDeck}).
+
 
 \subsection{Vorstellung und Erklärung}
 \subsubsection{Top Panel}
@@ -367,11 +369,11 @@ Die Kartenwerte bestehen ja aus \say{2}, \say{3}, \say{4}, \say{5}, \say{6}, \sa
     \caption{Screenshot: Bottom Panel}
 \end{figure}
 
-Das Panel besteht aus einem \texttt{JComponent} des Typs \texttt{JPanel}. Beginnend von links nach rechts sieht man zuerst ein \texttt{JLabel} mit dem Titel der App, \say{Mischmaschine}. Zum JLabel wurde auch noch ein Shuffle-Logo angefügt, passend zur Funktion des Programmes - dem zufälligen mischen.\\
+Das Panel besteht aus einem \texttt{JComponent} des Typs \texttt{JPanel}. Beginnend von links nach rechts sieht man zuerst ein \texttt{JLabel} mit dem Titel der App, \say{Mischmaschine}. Zum JLabel wurde auch noch ein Shuffle-Logo angefügt, passend zur Funktion des Programmes - dem zufälligen Mischen.\\
 
 Als nächstes kommt der Misch-Button. Dieser sorgt dafür dass alle Karten - auch die welche sich auf einer anderen Seite befinden und somit nicht zu sehen sind - gemischt werden in dem die Funktion \texttt{KartenDeck.mischen()} aufgerufen wird. Dann wird der das Karten-Panel geupdated damit die Änderungen der Kartenreihenfolge sichtbar werden für den Nutzer.\\
 
-Der Reset-Button stellt die versetzt die App wieder in ihren Anfangszustand: Ein vollständiges, sortiertes Kartendeck wird angezeigt. Dazu wird das Kartendeck neu generiert mit der \texttt{KartenDeck.generateFullDeck}-Methode, und schliesslich das Kartenpanel geupdated.
+Der Reset-Button stellt die versetzt die App wieder in ihren Anfangszustand: Ein vollständiges, sortiertes Kartendeck wird angezeigt. Dazu wird das Kartendeck neu generiert mit der \texttt{KartenDeck.generateFullDeck()}-Methode, und schliesslich das Kartenpanel geupdated.
 
 \subsubsection{Bottom Panel}
 \begin{figure}[H]
@@ -390,8 +392,6 @@ Zwischen diesen beiden Knöpfen sind noch zwei \texttt{JLabel} welche die insges
     \includegraphics[width=.9\textwidth]{media/card-panel.jpg}
     \caption{Screenshot: Card Panel}
 \end{figure}
-
-\subsection{Verwendete Tools}
 
 \subsection{Abschluss / Rückblick}
 

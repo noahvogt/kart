@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class KartenDeck {
-    private static final int MIN_DECK_SIZE = 0;
-    private static final int MAX_DECK_SIZE = 52;
-
     protected ArrayList<Karte> kartenListe = new ArrayList<Karte>();
 
     public KartenDeck() {
@@ -46,7 +43,7 @@ public class KartenDeck {
     }
 
     /* return value '-1' means karte not found */
-    public int getListIndexByKarte(Karte karte) {
+    private int getListIndexByKarte(Karte karte) {
         int found_index = -1;
         for (int index = 0; index < this.kartenListe.size(); index++) {
             if (karte.getWert() == this.kartenListe.get(index).getWert() &&

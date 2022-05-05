@@ -14,3 +14,4 @@
 *.fls
 *.ilg
 *.ind
+_minted*
