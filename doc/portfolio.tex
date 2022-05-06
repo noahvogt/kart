@@ -105,11 +105,14 @@ includeheadfoot}
 % for code snippits
 \usepackage{listings}
 \usepackage{color}
+\usepackage{xcolor}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{background}{rgb}{0.36,0.36,0.36}
+\definecolor{shpurple}{HTML}{C301FF}
+\definecolor{shgreen}{HTML}{3CFF00}
 
 \lstset{
     numbersep=3pt,
@@ -126,7 +129,10 @@ includeheadfoot}
     columns=flexible,
     xleftmargin=0.5cm,framesep=8pt,framerule=0pt,
     aboveskip=3mm,
-    belowskip=3mm,
+    morekeywords={*, factorial, sum, erlang},
+    keywordstyle=\color{shpurple}\textbf,
+    commentstyle=\color{shgreen}\textit,
+    stringstyle=\color{shred}   belowskip=3mm,
 }
 
 %\usepackage[backend=biber,style=apa]{biblatex}
@@ -258,13 +264,98 @@ Auf die Schlussfolgerungen und Reflexionen auf die Arbeit als gesamtes wird noch
     \centering
     \includegraphics[width=.6\textwidth]{media/grober-ansatz.png}
     \caption{Spielkarten}
+    % TODO: mention 3 panels
 \end{figure}
 
 Wie in der obigen Abbildung ersichtlich, wird in der Hauptklasse \texttt{Karten} durch das \texttt{SwingUtilities.invokeLater()}-Environment ausgeführt, welches den einzigen Nutzen hat, das Grafikfenster zu starten, welches in der Klasse \texttt{MainWindow} geschrieben ist.\\
 
-Das Grafikfenster besteht aus verschiedenen Komponenten der AWT- und Swing-Library
+Das Grafikfenster besteht aus verschiedenen Komponenten der AWT- und Swing-Library, doch darauf wird später im Text noch genauer eingegangen. Grob ist das Programm aber eingeteilt in ein Top-Panel, Bottom-Panel und eine Kartenansicht dazwischen.\\
+
+Um mit dem Kartendeck im Grafikfenster sinnvoll umgehen zu können, wurde ein Objekt resp. eine Klasse names \texttt{KartenDeck} erstellt, welche alle nötigen Methoden besitzt für die Manipulation des Attributs, einer \texttt{ArrayList} des Typs \texttt{Karte}.
+
+\subsubsection{Grafisches Interface}
+% TODO: insert irl plan
+
+Um ein Kartenspiel grafisch darzustellen wurde überlegt, es muss ein Fenster her, das in der Lage ist alle 52 Karten des Decks darzustellen. Und das wie schon bei der Aufgabeninterpretation erwähnt, am besten ohne Überlappungen von Karten.
+
+JComponents
+
+\subsubsection{Datenklasse \texttt{Karte}}
+Um eine Sache in ein Datenobjekt zu übersetzen, muss man sich erst einmal überlegen, was für Eigenschaften eine Spielkarte so besitzt. Da wären zuerst die \textit{Kartenwerte} von 2 bis Ass und die sogenannten \textit{Kartenfarben} Pik, Karo, Herz und Kreuz. Mit diesen beiden Eigenschaften kann eine Karte \textit{eindeutig} definiert werden. Diese beiden Karteneigenschaften sollen dann dementsprechend Attribute der Klasse \texttt{Karte} sein.\\
+
+Da die Kartenfarbe nur vier feste, gleichwertige Werte annehmen kann, welche sich am besten durch ihren Namen referenzieren lassen, scheint hier die Nutzung eines \texttt{enum}s angebracht. Im Code sieht dass dann so aus:\\ % TODO: insert enum / Karte.java attributes lstlisting
+
+\lstset{language=java}
+\begin{lstlisting}
+    public enum Farbe {
+        KREUZ, PIK, KARO, HERZ;
+    }
+\end{lstlisting}
+
+
+Die Kartenwerte bestehen ja aus \say{2}, \say{3}, \say{4}, \say{5}, \say{6}, \say{7}, \say{8}, \say{9}, \say{10}, \say{Bauer}, \say{Dame}, \say{König}, \say{Ass}. Diese sind im Gegensatz zu den Karten nicht gleichwertig und lassen sich ganzzahligen Werten zuordnen. Für dieses Projekt sind diese wie folgt definiert:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+    \hline
+    \textbf{Kartenwert} & \textbf{Integer Wert}\\
+    \hline
+    \say{1} & \texttt{1}\\
+    \hline
+    \say{2} & \texttt{2}\\
+    \hline
+    \say{3} & \texttt{3}\\
+    \hline
+    \say{4} & \texttt{4}\\
+    \hline
+    \say{5} & \texttt{5}\\
+    \hline
+    \say{6} & \texttt{6}\\
+    \hline
+    \say{7} & \texttt{7}\\
+    \hline
+    \say{8} & \texttt{8}\\
+    \hline
+    \say{9} & \texttt{9}\\
+    \hline
+    \say{10} & \texttt{10}\\
+    \hline
+    \say{Bauer} & \texttt{11}\\
+    \hline
+    \say{Dame} & \texttt{12}\\
+    \hline
+    \say{König} & \texttt{13}\\
+    \hline
+    \say{Ass} & \texttt{14}\\
+    \hline
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Datenklasse \texttt{KartenDeck}}
 
 \subsection{Vorstellung und Erklärung}
+\subsubsection{Top Panel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{media/top-panel.jpg}
+    \caption{Screenshot: Bottom Panel}
+\end{figure}
+
+\subsubsection{Bottom Panel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{media/bottom-panel.jpg}
+    \caption{Screenshot: Bottom Panel}
+\end{figure}
+
+\subsubsection{Card Panel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{media/card-panel.jpg}
+    \caption{Screenshot: Card Panel}
+\end{figure}
 
 \subsection{Verwendete Tools}
 
