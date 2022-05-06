@@ -283,6 +283,30 @@ JComponents
 \subsubsection{Datenklasse \texttt{Karte}}
 Um eine Sache in ein Datenobjekt zu übersetzen, muss man sich erst einmal überlegen, was für Eigenschaften eine Spielkarte so besitzt. Da wären zuerst die \textit{Kartenwerte} von 2 bis Ass und die sogenannten \textit{Kartenfarben} Pik, Karo, Herz und Kreuz. Mit diesen beiden Eigenschaften kann eine Karte \textit{eindeutig} definiert werden. Diese beiden Karteneigenschaften sollen dann dementsprechend Attribute der Klasse \texttt{Karte} sein.\\
 
+\begin{figure}[H]
+\lstset{language=java}
+\begin{lstlisting}
+    public class Karte {
+        public enum Farbe {
+            KREUZ, PIK, KARO, HERZ;
+        }
+
+        private static final int MIN_WERT = 2;
+        private static final int MAX_WERT = 14;
+
+        private int wert;
+        private Farbe farbe;
+\end{lstlisting}
+    \caption{Deklaration der Klasse \texttt{Karte} und deren Attributen}
+\end{figure}
+
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=.9\textwidth]{media/top-panel.jpg}
+%     \caption{Screenshot: Bottom Panel}
+% \end{figure}
+
 Da die Kartenfarbe nur vier feste, gleichwertige Werte annehmen kann, welche sich am besten durch ihren Namen referenzieren lassen, scheint hier die Nutzung eines \texttt{enum}s angebracht. Im Code sieht dass dann so aus:\\ % TODO: insert enum / Karte.java attributes lstlisting
 
 \lstset{language=java}
@@ -343,12 +367,22 @@ Die Kartenwerte bestehen ja aus \say{2}, \say{3}, \say{4}, \say{5}, \say{6}, \sa
     \caption{Screenshot: Bottom Panel}
 \end{figure}
 
+Das Panel besteht aus einem \texttt{JComponent} des Typs \texttt{JPanel}. Beginnend von links nach rechts sieht man zuerst ein \texttt{JLabel} mit dem Titel der App, \say{Mischmaschine}. Zum JLabel wurde auch noch ein Shuffle-Logo angefügt, passend zur Funktion des Programmes - dem zufälligen mischen.\\
+
+Als nächstes kommt der Misch-Button. Dieser sorgt dafür dass alle Karten - auch die welche sich auf einer anderen Seite befinden und somit nicht zu sehen sind - gemischt werden in dem die Funktion \texttt{KartenDeck.mischen()} aufgerufen wird. Dann wird der das Karten-Panel geupdated damit die Änderungen der Kartenreihenfolge sichtbar werden für den Nutzer.\\
+
+Der Reset-Button stellt die versetzt die App wieder in ihren Anfangszustand: Ein vollständiges, sortiertes Kartendeck wird angezeigt. Dazu wird das Kartendeck neu generiert mit der \texttt{KartenDeck.generateFullDeck}-Methode, und schliesslich das Kartenpanel geupdated.
+
 \subsubsection{Bottom Panel}
 \begin{figure}[H]
     \centering
     \includegraphics[width=.9\textwidth]{media/bottom-panel.jpg}
     \caption{Screenshot: Bottom Panel}
 \end{figure}
+
+Das Bottom-Panel hat links und rechts zwei Arrow-Buttons - des Typs \texttt{JButton} - mit der man zwischen den verschiedenen Seiten des Kartenpanels wechseln kann. Doch bevor diese gewechselt werden, wird geprüft ob es überhaupt nötig ist: Denn wenn man schon auf Seite 3 von 3 ist und auch den Pfeil nach rechts klickt, macht es ja keinen Sinn zu berechnen was auf Seite 4 ist und auf diese nichtexistente Seite zu wechseln.\\
+
+Zwischen diesen beiden Knöpfen sind noch zwei \texttt{JLabel} welche die ingesamte Anzahl der Karten anzeigt und die aktuelle resp. letztmögliche Seitenanzahl der Kartenanzeige.
 
 \subsubsection{Card Panel}
 \begin{figure}[H]
