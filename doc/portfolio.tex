@@ -233,8 +233,16 @@ Sie lernen die Klasse \texttt{java.util.ArrayList} kennen und stellen dadurch fe
 Anforderungen (i) und (iii) über die beiden Methoden \texttt{add()} und \texttt{Iterator()} erfüllt. Für die Realisierung der Klasse \texttt{MischMaschine} können Sie also grundsätzlich die Klasse \texttt{ArrayList} und das Konzept der Vererbung nutzen. Um die Anforderung (ii) zu implementieren, müssen Sie zusätzlich Ihre eigene Methode \texttt{mischen()} schreiben (s. die Methode \texttt{java.util.Collections.shuffle()} aus der Klasse \texttt{java.util.*}), die das Mischen tatsächlich realisiert, und zu Ihrer Klasse hinzufügen.
 Implementieren Sie auf dieser Weise die externe Klasse MischMaschine, die Objekte der Hauptklasse \texttt{Karten} aufnehmen, mischen und durchlaufen kann.}\\
 
+Dass Objekte der Klasse \texttt{MischMaschine} in der Lage sein sollen (i) - (iii) zu erfüllen ist verständlich, doch da jedoch die Klasse eine grafische Oberfläche starten soll, wird es als sinnvoller empfunden diese drei Punkte durch die Unterklasse resp. Datentyp-Klasse \texttt{KartenDeck} welche wiederum Daten der Datentyp-Klasse \texttt{Karte} bearbeitet. Dies steht ja nicht im Widerspruch zur Aufgabenstellung, sondern eine Interpretation.\\
+
 \textit{\textbf{1c)}: Ändern Sie die Hauptklasse Karten so ab, dass sie alle erzeugten Karten des Kartenspiels an die Klasse MischMaschine übergibt. Die MischMaschine soll die Karten mischen und
-anschliessend sie an die Hauptklasse Karten in der gemischten Reihenfolge zurückgeben, wo sie schlussendlich auf den Bildschirm im grafischen Interface ausgelegt werden.}
+anschliessend sie an die Hauptklasse Karten in der gemischten Reihenfolge zurückgeben, wo sie schlussendlich auf den Bildschirm im grafischen Interface ausgelegt werden.}\\
+
+Hier macht es relativ wenig Sinn nach Ansicht des Autors dieser Arbeit, die Hauptklasse \texttt{Karten} direkt zu bearbeiten, um die im grafischen Interface abgebildeten Karten zu mischen. Denn solch eine Änderung sollte in der jeweiligen aus der Klasse \texttt{Karten} gecallten Klasse geschehen, im Falle der hier präsentierten Lösung ist das in der Klasse \texttt{MainWindow}.\\
+
+Auch dass die zur Mischung stehenden Karten an die Klasse \texttt{MischMaschine} abgegeben werden soll, erscheint auch nicht direkt sinnvoll. In dieser Lösung wird das Kartendeck im User Interface in einer Instanz der Klasse \texttt{KartenDeck} gespeichert und die Mischfunktion als Methode dieser Klasseninstanz einfach gecallt.
+
+
 
 \subsubsection{Bewertung}
 Vom Autor dieser Arbeit wird diese Aufgabe als doch recht sinnvoll angesehen. Einerseits ist das Handling eines Kartenspiels resp. eines Kartendecks ein recht passender Fall, wo man die Prinzipien der OOP-Konzepts (Objekt-Orientierten Programmierung) anwenden kann: So erschien es sinnvoll eine Klasse \texttt{Karte} zu schreiben um den Datentyp einer Karte als Objekt darzustellen inklusive Getter- und Settermethoden und passenden Attributen. Ein Kartendeck wäre dann eine Klasse welche eine \texttt{ArrayList} ist, welche Objekte der Klasse \texttt{Karte} aufnehmen, und passende Methoden zu deren Manipulation bieten (Karten hinzufügen, entfernen, mischen, etc.). Ein paar OOP-Konzepte wurden im Laufe des Unterrichts im Ergänzungsfach Informatik schon angeschnitten, weshalb es nach der Meinung des Autors auch schön ist, diese wiederverwenden zu können. \\
@@ -244,7 +252,17 @@ Was auch im Unterricht behandelt wurde, sind simple grafische Interfaces mit der
 Auf die Schlussfolgerungen und Reflexionen auf die Arbeit als gesamtes wird noch später im letzten Punkt genauer eingegangen, doch die Arbeit erschien dem Autor ausgewogen bezüglich Machbarkeit, Aufwand, Themenbereichen (Karten Backend und GUI Frontend). Ein Kritikpunkt ist aber, dass die Namen der Klassen - \texttt{Karten} und \texttt{MischMaschine} - vorgegeben waren, denn da es nach Ansicht des Autors dieses Portfolios seine kreativen Freiraum bezüglich Quellcode-Struktur und Klassenbenennung. Gegeben, bei dieser Aussage befindet man sich auf hohem Niveau der Kritik.
 
 \subsection{Lösungsansatz}
-\subsection{grob}
+
+\subsubsection{Grobe Übersicht}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{media/grober-ansatz.png}
+    \caption{Spielkarten}
+\end{figure}
+
+Wie in der obigen Abbildung ersichtlich, wird in der Hauptklasse \texttt{Karten} durch das \texttt{SwingUtilities.invokeLater()}-Environment ausgeführt, welches den einzigen Nutzen hat, das Grafikfenster zu starten, welches in der Klasse \texttt{MainWindow} geschrieben ist.\\
+
+Das Grafikfenster besteht aus verschiedenen Komponenten der AWT- und Swing-Library
 
 \subsection{Vorstellung und Erklärung}
 
