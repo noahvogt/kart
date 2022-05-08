@@ -161,17 +161,18 @@ sorting=ynt,
 
 \section{Einleitung}
 \subsection{Darstellung}
-Das Produkt dieser Portfolioarbeit ist ein ausführbares Programm mit geografischer Oberfläche, welches ein volles Jass-Kartendeck - also 52 Karten - darstellt und eine Mischfunktion anbietet.\\
+Das Produkt dieser Portfolioarbeit ist ein ausführbares Programm mit grafischer Oberfläche, welches ein volles Jass-Kartendeck - also 52 Karten - darstellt und eine Mischfunktion anbietet.\\
 
 \begin{figure}[H]
     \centering
+    % TODO: redo this screenshot
     \includegraphics[width=.7\textwidth]{media/early-screenshot.jpg}
     \caption{Das Produkt}
 \end{figure}
 
-Zuerst sind die Karten in sortierter Reihenfolge dargestellt, sie werden erst durch das Drücken auf den \say{Misch}-Button gemischt. Dieser Vorgang lässt sich beliebig oft wiederholen durch erneutes Drücken des Knopfes durch den Nutzer. Um wieder zum sortierten Anfangszustand zurück zu gelangen, kann man den \say{Reset}-Button drücken.\\
+Zuerst sind die Karten in sortierter Reihenfolge dargestellt, sie werden erst durch das Drücken auf den \say{Misch}-Knopf gemischt. Dieser Vorgang lässt sich beliebig oft wiederholen durch erneutes Drücken des Knopfes durch den Nutzer. Um wieder zum sortierten Anfangszustand zurück zu gelangen, kann man den \say{Reset}-Button drücken.\\
 
-Da man die Karten alle relativ klein darstellen müsste, um das ganze Kartendeck gleichzeitig zeigen zu können, wurde sich entschieden, die Kartenanzeige in verschiedene Fenster einzuteilen. So gibt es drei Seiten, mit der man durch anklicken der Arrowbuttons navigieren kann. Jede Seite besteht aus einem Rasterlayout bestehend aus drei Reihen und sieben Spalten. Die Karten werden von oben links nach unten rechts gefüllt, doch dazu später mehr.\\
+Da man die Karten alle relativ klein darstellen müsste, um das ganze Kartendeck gleichzeitig zeigen zu können, wurde sich entschieden, die Kartenanzeige in verschiedene Fenster einzuteilen. So gibt es drei Seiten, mit der man durch Anklicken der Arrowbuttons navigieren kann. Jede Seite besteht aus einem Rasterlayout bestehend aus je drei Reihen und sieben Spalten. Die Karten werden von oben links nach unten rechts gefüllt, doch dazu später mehr.\\
 
 
 \subsection{Abgrenzung}
@@ -179,17 +180,18 @@ Es gibt einige Einschränkungen, welche den Rahmen dieser Arbeit setzen:
 
 \begin{itemize}
     \item \textbf{Die Grundbedingungen} Es sollen Abgabetermine und formale Vorgaben erfüllt werden, wie definiert im Arbeitsauftrag.
-    \item \textbf{Die Aufgabestellung} Diese gilt zu beachten und soll erfüllt werden mit all ihren Teilaufgaben. Viel weiter darüber hinaus soll die App funktionstechnisch also nicht gehen, stattdessen soll vor dem Hinzufügen neuer Features sorgfältig abgewogen werden, ob diese zu weit gehen oder noch im Sinne der Aufgabenstellung zu verstehen sind und somit im Rahmen sind.
-    \item \textbf{Die Programmiersprache} Zur Lösung der Aufgabestellung und Programmierung der App soll die altbekannte Sprache \texttt{Java} verwendet werden. Davon ausgenommen ist hier aber das Buildscript (\texttt{build.sh}), welches das Programm kompiliert und eine \texttt{.jar}-Executable ausgibt.
+    \item \textbf{Die Aufgabestellung} Diese gilt zu beachten und soll erfüllt werden mit all ihren Teilaufgaben. Viel weiter darüber hinaus soll die App funktionstechnisch also nicht gehen, stattdessen soll vor dem Hinzufügen neuer Features sorgfältig abgewogen werden, ob diese zu weit gehen oder noch im Sinne der Aufgabenstellung zu verstehen sind und somit noch im Rahmen sind.
+    \item \textbf{Die Programmiersprache} Zur Lösung der Aufgabestellung und Programmierung der App soll die altbekannte, oft geliebte und gehasste Programmiersprache \texttt{Java} verwendet werden. Davon ausgenommen ist hier aber das Buildscript (\texttt{build.sh}), welches das Programm kompiliert und eine \texttt{.jar}-Executable ausgibt.
 \end{itemize}
 
 \subsection{Vorausschau}
 
-Im darauffolgenden Hauptteil dieser Portfolioarbeit wird zuerst genauer auf die Aufgabestellung eingegangen, analysiert und interpretiert. Dies ist ein wichtiger Schritt, denn er soll den weiteren Ablauf des Projekts bestimmen.\\
+Im darauffolgenden Hauptteil dieser Portfolioarbeit wird zuerst genauer auf die Aufgabestellung eingegangen, diese analysiert und interpretiert. Dies ist ein wichtiger Schritt, denn er soll den weiteren Ablauf des Projekts bestimmen.\\
 
 Als nächstes wird der grobe Lösungsansatz vorgestellt, und immer weiter vertieft. Dazu wird sich unter anderem auch reichlich bedient an Codebeispielen, Konzepten, Skizzen, Diagrammen und Screenshots, um durch die grafische Darstellung die Konzepte besser anschaulich zu machen.\\
 
-Ebenso wird auch auf die Wahl von Bibliotheken und relevanten Programmierwerkzeugen eingegangen. Diese werden je nach dem kurz vorgestellt, mit Alternativen verglichen und der Entscheid begründet.\\
+% TODO: remove this?
+Ebenso wird auch auf die Wahl von Bibliotheken und eingegangen. Diese werden je nach dem kurz vorgestellt, mit Alternativen verglichen und der Entscheid begründet.\\
 
 Abschliessend erfolgt der Rückblick auf das Projekt und der Autor bewertet die Erfahrungen, das Gelernte und die Resultate.
 
@@ -206,6 +208,7 @@ Abschliessend erfolgt der Rückblick auf das Projekt und der Autor bewertet die 
     \caption{Spielkarten}
 \end{figure}
 
+% TODO: correct citing
 Hier im Beispielbild (Abb. 1) wurde die Auslegung der Karten übereinanderliegend dargestellt, doch es wurde sich für eine nicht überlappende Darstellung der Karten entschieden, das die besser zu einem grafischen Programm passe aufgrund erhöhter Lesbarkeit und wesentlich geringerem Arbeitsaufwand.\\
 
 Es ist nicht klar gegeben, ob die ausführbare Klasse \texttt{Karten} mit \texttt{main()}-Methode als einzelnes Source File dastehen soll oder ob darin verwendete Module auch in anderen Source Files gespeichert werden können. Es wurde sich für diese Arbeit entschieden, das letztere zu wählen, um einen besser strukturierten Gesamtquellcode zu erreichen.\\
@@ -220,7 +223,7 @@ Sie lernen die Klasse \texttt{java.util.ArrayList} kennen und stellen dadurch fe
 Anforderungen (i) und (iii) über die beiden Methoden \texttt{add()} und \texttt{Iterator()} erfüllt. Für die Realisierung der Klasse \texttt{MischMaschine} können Sie also grundsätzlich die Klasse \texttt{ArrayList} und das Konzept der Vererbung nutzen. Um die Anforderung (ii) zu implementieren, müssen Sie zusätzlich Ihre eigene Methode \texttt{mischen()} schreiben (s. die Methode \texttt{java.util.Collections.shuffle()} aus der Klasse \texttt{java.util.*}), die das Mischen tatsächlich realisiert, und zu Ihrer Klasse hinzufügen.
 Implementieren Sie auf dieser Weise die externe Klasse MischMaschine, die Objekte der Hauptklasse \texttt{Karten} aufnehmen, mischen und durchlaufen kann.}\\
 
-Dass Objekte der Klasse \texttt{MischMaschine} in der Lage sein sollen (i) - (iii) zu erfüllen ist verständlich, doch da jedoch die Klasse eine grafische Oberfläche starten soll, wird es als sinnvoller empfunden diese drei Punkte durch die Unterklasse resp. Datentyp-Klasse \texttt{KartenDeck} welche wiederum Daten der Datentyp-Klasse \texttt{Karte} bearbeitet. Dies steht ja nicht im Widerspruch zur Aufgabenstellung, sondern eine Interpretation.\\
+Dass Objekte der Klasse \texttt{MischMaschine} in der Lage sein sollen (i) - (iii) zu erfüllen ist verständlich, doch da jedoch die Klasse eine grafische Oberfläche starten soll, wird es als sinnvoller empfunden diese drei Punkte durch die Klasse resp. Datentyp-Klasse \texttt{KartenDeck} - welche wiederum Daten der Datentyp-Klasse \texttt{Karte} bearbeitet - zu realisieren. Dies wird hier nicht als Widerspruch zur Aufgabenstellung, sondern lediglich als Interpretation verstanden.\\
 
 \textit{\textbf{1c)}: Ändern Sie die Hauptklasse Karten so ab, dass sie alle erzeugten Karten des Kartenspiels an die Klasse MischMaschine übergibt. Die MischMaschine soll die Karten mischen und
 anschliessend sie an die Hauptklasse Karten in der gemischten Reihenfolge zurückgeben, wo sie schlussendlich auf den Bildschirm im grafischen Interface ausgelegt werden.}\\
@@ -236,7 +239,7 @@ Vom Autor dieser Arbeit wird diese Aufgabe als doch recht sinnvoll angesehen. Ei
 
 Was auch im Unterricht behandelt wurde, sind simple grafische Interfaces mit der Flanagan-Bibliothek und der der \texttt{javax.swing}-Bibliothek. Nach der Erinnerung des Autors geschah dies in der Form von In- und Output Popup-Fenstern und Filepickern. Diese und die Swing-Bibliothek konnten auch wieder verwendet werden für die Erstellung der grafischen Oberfläche des Programmes.\\
 
-Auf die Schlussfolgerungen und Reflexionen auf die Arbeit als gesamtes wird noch später im letzten Punkt genauer eingegangen, doch die Arbeit erschien dem Autor ausgewogen bezüglich Machbarkeit, Aufwand, Themenbereichen (Karten Backend und GUI Frontend). Ein Kritikpunkt ist aber, dass die Namen der Klassen - \texttt{Karten} und \texttt{MischMaschine} - vorgegeben waren, denn da es nach Ansicht des Autors dieses Portfolios seine kreativen Freiraum bezüglich Quellcode-Struktur und Klassenbenennung. Gegeben, bei dieser Aussage befindet man sich auf hohem Niveau der Kritik.
+Auf die Schlussfolgerungen und Reflexionen auf die Arbeit als gesamtes wird noch später im letzten Punkt genauer eingegangen, doch die Arbeit erschien dem Autor ausgewogen bezüglich Machbarkeit, Aufwand, Themenbereichen (Karten Backend und GUI Frontend).
 
 \subsection{Lösungsansatz}
 
@@ -255,12 +258,12 @@ invokeLater()}-Environment ausgeführt, welches den einzigen Nutzen hat, das Gra
 
 Das Grafikfenster besteht aus verschiedenen Komponenten der AWT- und Swing-Library, doch darauf wird später im Text noch genauer eingegangen. Grob ist das Programm aber eingeteilt in ein Top-Panel, Bottom-Panel und eine Kartenansicht dazwischen.\\
 
-Um mit dem Kartendeck im Grafikfenster sinnvoll umgehen zu können, wurde ein Objekt resp. eine Klasse names \texttt{KartenDeck} erstellt, welche alle nötigen Methoden besitzt für die Manipulation des Attributs, einer \texttt{ArrayList} des Typs \texttt{Karte}.
+Um mit dem Kartendeck im Grafikfenster sinnvoll umgehen zu können, wurde ein Objekt resp. eine Klasse names \texttt{KartenDeck} erstellt, welche alle nötigen Methoden besitzt für die Manipulation seines Attributs, einer \texttt{ArrayList} des Typs \texttt{Karte}.
 
 \subsubsection{Grafisches Interface}
 % TODO: insert irl plan
 
-Um ein Kartenspiel grafisch darzustellen wurde überlegt, es muss ein Fenster her, das in der Lage ist alle 52 Karten des Decks darzustellen. Und das wie schon bei der Aufgabeninterpretation erwähnt, am besten ohne Überlappungen von Karten. Die hier sichtbare, ursprüngliche Bleistift-Skizze wurde fast eins zu eins umgesetzt und kaum umkonzipiert:
+Um ein Kartenspiel grafisch darzustellen wurde überlegt, es müsse ein Fenster her, das in der Lage ist alle 52 Karten des Decks darzustellen. Und das wie schon bei der Aufgabeninterpretation erwähnt, am besten ohne Überlappungen von Karten. Die hier sichtbare, ursprüngliche Bleistift-Skizze wurde fast eins zu eins umgesetzt und kaum umkonzipiert:
 
 \begin{figure}[H]
     \centering
@@ -277,7 +280,7 @@ Um dieses Konzept umsetzen zu können, wurden verschiedene JComponents der SWING
 \end{figure}
 
 \subsubsection{Datenklasse \texttt{Karte}}
-Um eine Sache in ein Datenobjekt zu übersetzen, muss man sich erst einmal überlegen, was für Eigenschaften eine Spielkarte so besitzt. Da wären zuerst die \textit{Kartenwerte} von 2 bis Ass und die sogenannten \textit{Kartenfarben} Pik, Karo, Herz und Kreuz. Mit diesen beiden Eigenschaften kann eine Karte \textit{eindeutig} definiert werden. Diese beiden Karteneigenschaften sollen dann dementsprechend Attribute der Klasse \texttt{Karte} sein.\\
+Um eine Sache in ein Datenobjekt zu übersetzen, muss man sich erst einmal überlegen, was für Eigenschaften eine Spielkarte so besitzt. Da wären zuerst die \textit{Kartenwerte} von \say{2} bis \say{Ass} und die sogenannten \textit{Kartenfarben} Pik, Karo, Herz und Kreuz. Mit diesen beiden Eigenschaften kann eine Karte \textit{eindeutig} definiert werden. Diese beiden Karteneigenschaften sollen dann dementsprechend Attribute der Klasse \texttt{Karte} sein.\\
 
 Da die Kartenfarbe nur vier feste, gleichwertige Werte annehmen kann, welche sich am besten durch ihren Namen referenzieren lassen, scheint hier die Nutzung eines \texttt{enum}s angebracht.\\
 
@@ -358,7 +361,8 @@ Der Sinn dieser Klasse ist die Speicherung, Verwaltung und sonstige Manipulation
     \caption{Deklaration der Klasse \texttt{KartenDeck} und seinem Attribut}
 \end{listing}
 
-Für die Verwaltung dieses Kartendecks bietet die Klasse einige nützliche, öffentliche Methoden (abgesehen vom Constructor) wie zum anhängen und Löschen von Karten (\texttt{appendKarte(Karte karte)} und \texttt{removeKarte(Karte karte)}), dem generieren eines neuen Decks (\texttt{generateFullDeck()}), dem geordneten ausgeben aus der Kommandozeile (\texttt{print()}) und der Mischfunktion (\texttt{mischen()}). Auch zu erwähnen sind die Getter- und Settermethoden (\texttt{getDeck}, \texttt{getDeckSize}, \texttt{setDeck}).
+% TODO: formatting line breaks
+Für die Verwaltung dieses Kartendecks bietet die Klasse einige nützliche, öffentliche Methoden wie zum anhängen und Löschen von Karten (\texttt{appendKarte(Karte karte)} und \texttt{removeKarte(Karte karte)}), dem generieren eines neuen Decks (\texttt{generateFullDeck()}), dem geordneten ausgeben aus der Kommandozeile (\texttt{print()}) und der Mischfunktion (\texttt{mischen()}). Auch zu erwähnen sind die Getter- und Settermethoden (\texttt{getDeck}, \texttt{getDeckSize}, \texttt{setDeck}).
 
 
 \subsection{Vorstellung und Erklärung}
@@ -373,7 +377,7 @@ Das Panel besteht aus einem \texttt{JComponent} des Typs \texttt{JPanel}. Beginn
 
 Als nächstes kommt der Misch-Button. Dieser sorgt dafür dass alle Karten - auch die welche sich auf einer anderen Seite befinden und somit nicht zu sehen sind - gemischt werden in dem die Funktion \texttt{KartenDeck.mischen()} aufgerufen wird. Dann wird der das Karten-Panel geupdated damit die Änderungen der Kartenreihenfolge sichtbar werden für den Nutzer.\\
 
-Der Reset-Button stellt die versetzt die App wieder in ihren Anfangszustand: Ein vollständiges, sortiertes Kartendeck wird angezeigt. Dazu wird das Kartendeck neu generiert mit der \texttt{KartenDeck.generateFullDeck()}-Methode, und schliesslich das Kartenpanel geupdated.
+Der Reset-Button versetzt die App wieder in ihren Anfangszustand: Ein vollständiges, sortiertes Kartendeck wird angezeigt. Dazu wird das Kartendeck neu generiert mit der \texttt{KartenDeck.generateFullDeck()}-Methode, und schliesslich das Kartenpanel geupdated.
 
 \subsubsection{Bottom Panel}
 \begin{figure}[H]
@@ -382,7 +386,7 @@ Der Reset-Button stellt die versetzt die App wieder in ihren Anfangszustand: Ein
     \caption{Screenshot: Bottom Panel}
 \end{figure}
 
-Das Bottom-Panel hat links und rechts zwei Arrow-Buttons - des Typs \texttt{JButton} - mit der man zwischen den verschiedenen Seiten des Kartenpanels wechseln kann. Doch bevor diese gewechselt werden, wird geprüft ob es überhaupt nötig ist: Denn wenn man schon auf Seite 3 von 3 ist und auch den Pfeil nach rechts klickt, macht es ja keinen Sinn zu berechnen was auf Seite 4 ist und auf diese nicht existente Seite zu wechseln.\\
+Das Bottom-Panel hat links und rechts zwei Arrow-Buttons - des Typs \texttt{JButton} - mit der man zwischen den verschiedenen Seiten des Kartenpanels wechseln kann. Doch bevor diese gewechselt werden, wird geprüft ob es überhaupt nötig ist: Denn wenn man schon auf Seite 3 von 3 ist und auch den Pfeil nach rechts klickt, macht es ja keinen Sinn zu berechnen was auf Seite 4 ist und auf diese nicht-existente Seite zu wechseln.\\
 
 Zwischen diesen beiden Knöpfen sind noch zwei \texttt{JLabel} welche die insgesamte Anzahl der Karten anzeigt und die aktuelle resp. letztmögliche Seitenanzahl der Kartenanzeige.
 
@@ -393,6 +397,23 @@ Zwischen diesen beiden Knöpfen sind noch zwei \texttt{JLabel} welche die insges
     \caption{Screenshot: Card Panel}
 \end{figure}
 
+\subsubsection{Farbschema}
+
+Damit die Farben des User Interfaces einigermassen zusammenpassen vom Kontrast der Farbstärke usw. Anstatt einfach den Default-Look der verschiedenen \texttt{JComponent}s zu übernehmen, wurde sich entschieden ein recht bekanntes, beliebtes und etabliertes Farbschema zu nehmen namens \say{Nord}. Dieses wird oft verwendet um den Style seiner verschiedenen Desktopprogramme zu vereinheitlichen, oder um in seinem Terminalemulator und seinem Texteditor die gleichen Farben zu haben.\\
+
+So wurde den Knöpfen, Tool-Tips, Labels und Panel-Hintergründen eine der Farben aus dem Nord-Theme gegeben. Das einzige was nicht explizit an das Farbschema angepasst wurde, sind die Spielkarten. Diese passen nach der Meinung des Autors aber gut zum Rest des Programmes mit Nord-Theme.
+
 \subsection{Abschluss / Rückblick}
+
+Dem Autor hat das Programmieren der App doch recht Spass gemacht. Er konnte eine neue GUI-Library kennenlernen, und sich in etwa drei bis vier Stunden in diese einarbeiten. Auch die Erstellung der Datenklasse empfand dieser als interessant.\\
+
+% cite uncle bob
+Es wurde versucht die Konzepte der OOP so gut wie möglich umzusetzen und sich an den Tipps und Tricks aus dem Buch Clean Code von Robert C. Martin zu orientieren und diese umzusetzen. Bekannt geworden ist Martin unter dem Spitznamen \say{Uncle Bob} für seine spannenden Präsentationen und seine \say{SOLID Principles} (Single Responsibility, Open/Closed Principle, Liskov Substitution, Dependency Inversion). SOLID wurde auch versucht zu befolgen, mit einer Ausnahme: Dependency Inversion. Denn dazu hätten noch viel mehr abstrakte Klassen resp. Interfaces erstellt werden müssen, z.B. hätte man anstatt die Jasskarten direkt in der Klasse \texttt{Karten} direkt zu implementieren daraus eine abstrakte Klasse machen müssen und eine Subclass für Jasskarten erstellen müssen mit einem Namen wie \texttt{JassKarten}.\\
+
+Mit dem Produkt - der MischMaschine mit .-jar-Executable - ist der Autor auch sehr zufrieden. Es kam ein wirklich sehr portables, intuitives und für ein JVM-Bytecode-Programm performantes Produkt mit einem grafisch ansprechenden Interface heraus. Natürlich hat das Programm in dieser Form keinen \say{Real-World-Use-Case}, aber man kann ja auch immer nicht alles haben.\\
+
+Man stellt sich natürlich auch die Frage, wie man das Programm erweitern könnte. 
+
+% TODO: mention (logo) licensing
 
 \end{document}
