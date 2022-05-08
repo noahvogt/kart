@@ -165,7 +165,6 @@ Das Produkt dieser Portfolioarbeit ist ein ausführbares Programm mit grafischer
 
 \begin{figure}[H]
     \centering
-    % TODO: redo this screenshot
     \includegraphics[width=.7\textwidth]{media/early-screenshot.jpg}
     \caption{Das Produkt}
 \end{figure}
@@ -190,9 +189,6 @@ Im darauffolgenden Hauptteil dieser Portfolioarbeit wird zuerst genauer auf die 
 
 Als nächstes wird der grobe Lösungsansatz vorgestellt, und immer weiter vertieft. Dazu wird sich unter anderem auch reichlich bedient an Codebeispielen, Konzepten, Skizzen, Diagrammen und Screenshots, um durch die grafische Darstellung die Konzepte besser anschaulich zu machen.\\
 
-% TODO: remove this?
-Ebenso wird auch auf die Wahl von Bibliotheken und eingegangen. Diese werden je nach dem kurz vorgestellt, mit Alternativen verglichen und der Entscheid begründet.\\
-
 Abschliessend erfolgt der Rückblick auf das Projekt und der Autor bewertet die Erfahrungen, das Gelernte und die Resultate.
 
 
@@ -208,8 +204,7 @@ Abschliessend erfolgt der Rückblick auf das Projekt und der Autor bewertet die 
     \caption{Spielkarten}
 \end{figure}
 
-% TODO: correct citing
-Hier im Beispielbild (Abb. 1) wurde die Auslegung der Karten übereinanderliegend dargestellt, doch es wurde sich für eine nicht überlappende Darstellung der Karten entschieden, das die besser zu einem grafischen Programm passe aufgrund erhöhter Lesbarkeit und wesentlich geringerem Arbeitsaufwand.\\
+Hier im Beispielbild wurde die Auslegung der Karten übereinanderliegend dargestellt, doch es wurde sich für eine nicht überlappende Darstellung der Karten entschieden, das die besser zu einem grafischen Programm passe aufgrund erhöhter Lesbarkeit und wesentlich geringerem Arbeitsaufwand.\\
 
 Es ist nicht klar gegeben, ob die ausführbare Klasse \texttt{Karten} mit \texttt{main()}-Methode als einzelnes Source File dastehen soll oder ob darin verwendete Module auch in anderen Source Files gespeichert werden können. Es wurde sich für diese Arbeit entschieden, das letztere zu wählen, um einen besser strukturierten Gesamtquellcode zu erreichen.\\
 
@@ -261,14 +256,13 @@ Das Grafikfenster besteht aus verschiedenen Komponenten der AWT- und Swing-Libra
 Um mit dem Kartendeck im Grafikfenster sinnvoll umgehen zu können, wurde ein Objekt resp. eine Klasse names \texttt{KartenDeck} erstellt, welche alle nötigen Methoden besitzt für die Manipulation seines Attributs, einer \texttt{ArrayList} des Typs \texttt{Karte}.
 
 \subsubsection{Grafisches Interface}
-% TODO: insert irl plan
 
 Um ein Kartenspiel grafisch darzustellen wurde überlegt, es müsse ein Fenster her, das in der Lage ist alle 52 Karten des Decks darzustellen. Und das wie schon bei der Aufgabeninterpretation erwähnt, am besten ohne Überlappungen von Karten. Die hier sichtbare, ursprüngliche Bleistift-Skizze wurde fast eins zu eins umgesetzt und kaum umkonzipiert:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.4\textwidth]{media/grober-ansatz.png}
-    \caption{"ursprüngliches Konzept"}
+    \includegraphics[width=.6\textwidth]{media/skizze.png}
+    \caption{ursprüngliches Konzept}
 \end{figure}
 
 Um dieses Konzept umsetzen zu können, wurden verschiedene JComponents der SWING-Library eingesetzt welche folgendermassen organisiert sind in der Klasse \texttt{MainWindow}:
@@ -361,8 +355,7 @@ Der Sinn dieser Klasse ist die Speicherung, Verwaltung und sonstige Manipulation
     \caption{Deklaration der Klasse \texttt{KartenDeck} und seinem Attribut}
 \end{listing}
 
-% TODO: formatting line breaks
-Für die Verwaltung dieses Kartendecks bietet die Klasse einige nützliche, öffentliche Methoden wie zum anhängen und Löschen von Karten (\texttt{appendKarte(Karte karte)} und \texttt{removeKarte(Karte karte)}), dem generieren eines neuen Decks (\texttt{generateFullDeck()}), dem geordneten ausgeben aus der Kommandozeile (\texttt{print()}) und der Mischfunktion (\texttt{mischen()}). Auch zu erwähnen sind die Getter- und Settermethoden (\texttt{getDeck}, \texttt{getDeckSize}, \texttt{setDeck}).
+Für die Verwaltung dieses Kartendecks bietet die Klasse einige nützliche, öffentliche Methoden wie zum anhängen und Löschen von Karten (\texttt{appendKarte(Karte karte)} und \texttt{removeKarte(Karte karte)}), dem generieren eines neuen Decks (\texttt{generateFullDeck()}), dem geordneten ausgeben aus der Kommandozeile (\texttt{print()}) und der Mischfunktion (\texttt{mischen()}). Auch zu erwähnen sind die Getter- und Settermethoden (\texttt{getDeck}, \texttt{getDeckSize()}, \texttt{setDeck()}).
 
 
 \subsection{Vorstellung und Erklärung}
@@ -375,7 +368,7 @@ Für die Verwaltung dieses Kartendecks bietet die Klasse einige nützliche, öff
 
 Das Panel besteht aus einem \texttt{JComponent} des Typs \texttt{JPanel}. Beginnend von links nach rechts sieht man zuerst ein \texttt{JLabel} mit dem Titel der App, \say{Mischmaschine}. Zum JLabel wurde auch noch ein Shuffle-Logo angefügt, passend zur Funktion des Programmes - dem zufälligen Mischen.\\
 
-Als nächstes kommt der Misch-Button. Dieser sorgt dafür dass alle Karten - auch die welche sich auf einer anderen Seite befinden und somit nicht zu sehen sind - gemischt werden in dem die Funktion \texttt{KartenDeck.mischen()} aufgerufen wird. Dann wird der das Karten-Panel geupdated damit die Änderungen der Kartenreihenfolge sichtbar werden für den Nutzer.\\
+Als nächstes kommt der Misch-Button. Dieser sorgt dafür dass alle Karten - auch die welche sich auf einer anderen Seite befinden und somit nicht zu sehen sind - gemischt werden in dem die Funktion \texttt{KartenDeck.\\mischen()} aufgerufen wird. Dann wird der das Karten-Panel geupdated damit die Änderungen der Kartenreihenfolge sichtbar werden für den Nutzer.\\
 
 Der Reset-Button versetzt die App wieder in ihren Anfangszustand: Ein vollständiges, sortiertes Kartendeck wird angezeigt. Dazu wird das Kartendeck neu generiert mit der \texttt{KartenDeck.generateFullDeck()}-Methode, und schliesslich das Kartenpanel geupdated.
 
@@ -397,23 +390,25 @@ Zwischen diesen beiden Knöpfen sind noch zwei \texttt{JLabel} welche die insges
     \caption{Screenshot: Card Panel}
 \end{figure}
 
+Das Card Panel ist für den Endnutzer eigentlich nichts mehr als ein Rasterlayout, in dem die Karten der aktuelle Seite angezeigt werden. Die Sortierung verfolgt immer diesem Schema: Zuerst wird die oberste Reihe von links nach rechts durchgegangen, dann wird eine Reihe runtergegangen und auch hier wird wieder von der linkesten bis zur rechtesten Spalte durchiteriert, und dass bis zur jeweils letzen Reihe der jeweiligen Seite. Wenn eine Seite weniger Karten als ihre maximal mögliche Kapazität anzeigen soll, wird der Rest des Platzes durch unsichtbare Platzhalter-Karten gefüllt.
+
 \subsubsection{Farbschema}
 
 Damit die Farben des User Interfaces einigermassen zusammenpassen vom Kontrast der Farbstärke usw. Anstatt einfach den Default-Look der verschiedenen \texttt{JComponent}s zu übernehmen, wurde sich entschieden ein recht bekanntes, beliebtes und etabliertes Farbschema zu nehmen namens \say{Nord}. Dieses wird oft verwendet um den Style seiner verschiedenen Desktopprogramme zu vereinheitlichen, oder um in seinem Terminalemulator und seinem Texteditor die gleichen Farben zu haben.\\
 
-So wurde den Knöpfen, Tool-Tips, Labels und Panel-Hintergründen eine der Farben aus dem Nord-Theme gegeben. Das einzige was nicht explizit an das Farbschema angepasst wurde, sind die Spielkarten. Diese passen nach der Meinung des Autors aber gut zum Rest des Programmes mit Nord-Theme.
+So wurde den Knöpfen, Tool-Tips, Labels und Panel-Hintergründen eine der Farben aus dem Nord-Theme gegeben. Das einzige was nicht explizit an das Farbschema angepasst wurde, sind die Spielkarten. Diese passen nach der Meinung des Autors aber gut zum Rest des Programmes mit Nord-Theme. Mehr Informationen zu diesem Colorsheme sind erfassbar unter diesem Link: \url{https://www.nordtheme.com/}.
 
 \subsection{Abschluss / Rückblick}
 
 Dem Autor hat das Programmieren der App doch recht Spass gemacht. Er konnte eine neue GUI-Library kennenlernen, und sich in etwa drei bis vier Stunden in diese einarbeiten. Auch die Erstellung der Datenklasse empfand dieser als interessant.\\
 
 % cite uncle bob
-Es wurde versucht die Konzepte der OOP so gut wie möglich umzusetzen und sich an den Tipps und Tricks aus dem Buch Clean Code von Robert C. Martin zu orientieren und diese umzusetzen. Bekannt geworden ist Martin unter dem Spitznamen \say{Uncle Bob} für seine spannenden Präsentationen und seine \say{SOLID Principles} (Single Responsibility, Open/Closed Principle, Liskov Substitution, Dependency Inversion). SOLID wurde auch versucht zu befolgen, mit einer Ausnahme: Dependency Inversion. Denn dazu hätten noch viel mehr abstrakte Klassen resp. Interfaces erstellt werden müssen, z.B. hätte man anstatt die Jasskarten direkt in der Klasse \texttt{Karten} direkt zu implementieren daraus eine abstrakte Klasse machen müssen und eine Subclass für Jasskarten erstellen müssen mit einem Namen wie \texttt{JassKarten}.\\
+Es wurde versucht die Konzepte der OOP so gut wie möglich umzusetzen und sich an den Tipps und Tricks aus dem Buch \say{Clean Code} von Robert C. Martin zu orientieren und diese umzusetzen. Bekannt geworden ist Martin unter dem Spitznamen \say{Uncle Bob} für seine spannenden Präsentationen und seine \say{SOLID Principles} (Single Responsibility, Open/Closed Principle, Liskov Substitution, Dependency Inversion). SOLID wurde auch versucht zu befolgen, mit einer Ausnahme: Dependency Inversion. Denn dazu hätten noch viel mehr abstrakte Klassen resp. Interfaces erstellt werden müssen, z.B. hätte man anstatt die Jasskarten direkt in der Klasse \texttt{Karten} direkt zu implementieren daraus eine abstrakte Klasse machen müssen und eine Subclass für Jasskarten erstellen müssen mit einem Namen wie \texttt{JassKarten}.\\
 
 Mit dem Produkt - der MischMaschine mit .-jar-Executable - ist der Autor auch sehr zufrieden. Es kam ein wirklich sehr portables, intuitives und für ein JVM-Bytecode-Programm performantes Produkt mit einem grafisch ansprechenden Interface heraus. Natürlich hat das Programm in dieser Form keinen \say{Real-World-Use-Case}, aber man kann ja auch immer nicht alles haben.\\
 
-Man stellt sich natürlich auch die Frage, wie man das Programm erweitern könnte. 
+Man stellt sich natürlich auch die Frage, wie man das Programm erweitern könnte. Was naheliegend in den Sinn käme, wäre eine eine Möglichkeit Karten auszuwählen, um diese löschen zu können und ein Button, mit der man neue Karten der Kartenanzeige hinzufügen könnte. Ferner wäre es sinnvoll, das Programm so auszubauen, dass statt einer reinen mischbaren Kartenanzeige auch die Möglichkeit besteht, typische Kartenspiele wie z.B. Blackjack zu realisieren. Auch wäre es noch gut, selber andere Kartenformen als nur Jasskarten verwenden zu können, so beispielsweise Uno-Karten.\\
 
-% TODO: mention (logo) licensing
+Wie es auch sonst bei einigen Software-Projekten des Autors dieser Arbeit der Fall ist, ist auch dieses Programm online verfügbar auf GitHub. Der Source Code für die App und dieser Text sind einsehbar unter \url{https://github.com/noahvogt/kart/}.
 
 \end{document}
